@@ -8,6 +8,8 @@ class StudentModel extends HiveObject {
   String name;
   @HiveField(1)
   int age;
+  @HiveField(2)
+  String classs;
 
-  StudentModel({required this.name, required this.age});
+  StudentModel({required this.name, required this.age, required this.classs});
 }

@@ -8,7 +8,7 @@ class StudeentServiece {
     await studentbox.add(student);
   }
 
-  List<StudentModel> valueList(int indx) {
+  List<StudentModel> valueList() {
     return studentbox.values.toList();
   }
 

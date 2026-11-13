@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class AddPage extends StatefulWidget {
-  const AddPage({super.key});
+  final StudentModel? student;
+  final int? index;
+  final int? editIndex;
+  const AddPage({super.key, this.student, this.index, this.editIndex});
 
   @override
   State<AddPage> createState() => _AddPageState();
@@ -15,9 +18,61 @@ class _AddPageState extends State<AddPage> {
   final service = StudeentServiece();
   int? editIndex;
 
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.student != null) {
+      usernamController.text = widget.student!.name;
+      ageController.text = widget.student!.age.toString();
+      classController.text = widget.student!.classs;
+
+      editIndex = widget.index;
+    }
+  }
+
   final usernamController = TextEditingController();
   final ageController = TextEditingController();
   final classController = TextEditingController();
+
+  @override
+  void dispose() {
+    usernamController.dispose();
+    ageController.dispose();
+    classController.dispose();
+    super.dispose();
+  }
+
+  void click() async {
+    String username = usernamController.text;
+    int age = int.tryParse(ageController.text) ?? 0;
+    String classs = classController.text;
+
+    if (username.isEmpty || age.toString().isEmpty || classs.isEmpty) {
+      return;
+    }
+
+    StudentModel student = StudentModel(
+      name: username,
+      age: age,
+      classs: classs,
+    );
+
+    if (editIndex == null) {
+      await service.addData(student);
+    } else {
+      await service.update(editIndex!, student);
+      editIndex = null;
+    }
+
+    usernamController.clear();
+    ageController.clear();
+    classController.clear();
+
+    if (mounted) {
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +108,9 @@ class _AddPageState extends State<AddPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  click();
+                },
 
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
