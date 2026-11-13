@@ -1,4 +1,5 @@
 import 'package:edit_hive/model/student_model.dart';
+import 'package:edit_hive/serviece/studeent_serviece.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -11,6 +12,8 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   final Box<StudentModel> studentbox = Hive.box<StudentModel>("List");
+  final service = StudeentServiece();
+  int? editIndex;
 
   final usernamController = TextEditingController();
   final ageController = TextEditingController();
