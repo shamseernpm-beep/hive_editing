@@ -85,7 +85,7 @@ class _AddPageState extends State<AddPage> {
               controller: usernamController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: "",
+                hintText: "enter your name",
               ),
             ),
             SizedBox(height: 20),
