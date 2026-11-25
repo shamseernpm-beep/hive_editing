@@ -116,7 +116,7 @@ class _AddPageState extends State<AddPage> {
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.blue,
                 ),
-                child: Text("SUBMIT"),
+                child: Text(""),
               ),
             ),
           ],
