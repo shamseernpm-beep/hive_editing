@@ -93,7 +93,7 @@ class _AddPageState extends State<AddPage> {
               controller: ageController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: "enter your age",
+                hintText: "enter your ",
               ),
             ),
             SizedBox(height: 20),
